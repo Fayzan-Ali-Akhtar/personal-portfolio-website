@@ -65,7 +65,7 @@ export default function About() {
             <Card className="mb-10">
               <CardContent className="pt-6">
                 <h4 className="text-xl font-medium">Lahore University of Management Sciences (LUMS)</h4>
-                <p className="text-muted-foreground">B.S. Computer Science | CGPA: 3.65 | Dean's Honour List</p>
+                <p className="text-muted-foreground">B.S. Computer Science | Dean's Honour List</p>
                 <p className="text-sm text-muted-foreground mt-1">Sept 2021 – May 2025 | Lahore, Pakistan</p>
 
                 <div className="mt-4">
