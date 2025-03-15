@@ -73,11 +73,11 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-indigo-200">More</h4>
             <ul className="space-y-2">
-              <li>
+              {/* <li>
                 <a href="#blog" className="text-indigo-300 hover:text-white transition-colors">
                   Blog
                 </a>
-              </li>
+              </li> */}
               <li>
                 <a href="#contact" className="text-indigo-300 hover:text-white transition-colors">
                   Contact
