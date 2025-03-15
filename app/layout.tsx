@@ -11,7 +11,6 @@ export const metadata: Metadata = {
   title: "Fayzan Ali Akhtar - Full-Stack Developer & AI Enthusiast",
   description:
     "Portfolio of Fayzan Ali Akhtar, a Full-Stack Developer, AI Enthusiast, and Educator specializing in web development and AI/ML solutions.",
-    generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -22,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false} disableTransitionOnChange>
           <Navbar />
           {children}
         </ThemeProvider>
@@ -31,6 +30,3 @@ export default function RootLayout({
   )
 }
 
-
-
-import './globals.css'

@@ -1,15 +1,22 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { CheckCircle } from "lucide-react"
+import { useState } from "react"
+import Image from "next/image"
+
+// Import the image from the public/images folder
+import profilePic from "@/public/images/profile.jpg"
 
 export default function About() {
-  const milestones = [
-    { title: "Computer Science at LUMS", year: "2021-2025" },
-    // { title: "First Teaching Assistant Role", year: "2021" },
-    { title: "Internship at Devsinc", year: "2023" },
-    // { title: "400+ Students Mentored", year: "2021-2024" },
-  ]
+  // Image position control - adjust these values to reposition the image focus
+  // Values range from 0% to 100% for both horizontal and vertical positioning
+  const imagePosition = {
+    horizontal: "50%", // 0% (left) to 100% (right)
+    vertical: "30%", // 0% (top) to 100% (bottom) - adjusted to show more of the top
+  }
+
+  // State to track if the component is being hovered
+  const [isHovered, setIsHovered] = useState(false)
 
   return (
     <section id="about" className="py-20 bg-gradient-purple-blue bg-pattern-dots">
@@ -41,45 +48,94 @@ export default function About() {
               with creative problem-solving. I love transforming complex challenges into engaging, user-friendly
               applications.
             </p>
-            {/* <div className="pt-4">
-              <h3 className="text-xl font-semibold mb-4 text-indigo-700 dark:text-indigo-300">Teaching Experience</h3>
-              <p className="text-lg text-indigo-950 dark:text-indigo-200">
-                As a Teaching Assistant at LUMS, I supported over 400 students in courses such as Data Structures,
-                Object-Oriented Programming, Algorithms, Software Engineering, and Advanced Programming. This role
-                sharpened my ability to explain complex concepts in an accessible way.
-              </p>
-            </div> */}
           </motion.div>
 
+          {/* Profile Picture with Animation - Replacing Key Milestones */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
             viewport={{ once: true }}
-            className="bg-gradient-to-br from-white/90 to-indigo-50/90 dark:from-gray-800/90 dark:to-indigo-900/40 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-indigo-100 dark:border-indigo-900/30"
+            className="flex justify-center"
           >
-            <h3 className="text-xl font-semibold mb-6 text-center text-indigo-700 dark:text-indigo-300">
-              Key Milestones
-            </h3>
-            <div className="space-y-6 relative">
-              <div className="absolute left-3.5 top-0 h-full w-0.5 bg-gradient-to-b from-indigo-600 via-purple-600 to-pink-600"></div>
-              {milestones.map((milestone, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.1 * index }}
-                  viewport={{ once: true }}
-                  className="relative pl-10"
-                >
-                  <div className="absolute left-0 top-1.5 bg-white dark:bg-gray-800 rounded-full p-0.5 shadow-md">
-                    <CheckCircle className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
-                  </div>
-                  <h4 className="font-medium text-indigo-800 dark:text-indigo-300">{milestone.title}</h4>
-                  <p className="text-sm text-indigo-600 dark:text-indigo-400">{milestone.year}</p>
-                </motion.div>
-              ))}
-            </div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              onHoverStart={() => setIsHovered(true)}
+              onHoverEnd={() => setIsHovered(false)}
+              transition={{ type: "spring", stiffness: 300 }}
+              className="relative w-72 h-72 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-2xl"
+            >
+              {/* Base Image using Next.js Image component */}
+              <Image
+                src={profilePic}
+                alt="Fayzan Ali Akhtar"
+                fill
+                className="object-cover"
+                style={{
+                  objectPosition: `${imagePosition.horizontal} ${imagePosition.vertical}`,
+                }}
+              />
+
+              {/* Improved Subtle Overlay - using a vignette effect instead of full gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+
+              {/* Animated Border */}
+              <motion.div
+                animate={{
+                  opacity: isHovered ? 1 : 0,
+                  scale: isHovered ? 1 : 0.9,
+                }}
+                transition={{ duration: 0.3 }}
+                className="absolute inset-0 border-4 border-white/30 rounded-2xl"
+              />
+
+              {/* Animated Corner Accents */}
+              <motion.div
+                animate={{
+                  width: isHovered ? 40 : 0,
+                  height: isHovered ? 40 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+                className="absolute top-0 left-0 border-t-4 border-l-4 border-white/70 rounded-tl-lg"
+              />
+              <motion.div
+                animate={{
+                  width: isHovered ? 40 : 0,
+                  height: isHovered ? 40 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+                className="absolute top-0 right-0 border-t-4 border-r-4 border-white/70 rounded-tr-lg"
+              />
+              <motion.div
+                animate={{
+                  width: isHovered ? 40 : 0,
+                  height: isHovered ? 40 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+                className="absolute bottom-0 left-0 border-b-4 border-l-4 border-white/70 rounded-bl-lg"
+              />
+              <motion.div
+                animate={{
+                  width: isHovered ? 40 : 0,
+                  height: isHovered ? 40 : 0,
+                }}
+                transition={{ duration: 0.3 }}
+                className="absolute bottom-0 right-0 border-b-4 border-r-4 border-white/70 rounded-br-lg"
+              />
+
+              {/* Animated Text Overlay - now using animate instead of initial/whileHover */}
+              <motion.div
+                animate={{
+                  opacity: isHovered ? 1 : 0,
+                  y: isHovered ? 0 : 20,
+                }}
+                transition={{ duration: 0.3 }}
+                className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6"
+              >
+                <h3 className="text-xl font-bold text-white">Fayzan Ali Akhtar</h3>
+                <p className="text-white/80">Full-Stack Developer & AI Enthusiast</p>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

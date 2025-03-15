@@ -1,14 +1,13 @@
 "use client"
 
-import type React from "react"
-
-import { useState } from "react"
+import React, { useState } from "react"
 import { motion } from "framer-motion"
 import { Send, Github, Linkedin, Mail, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useToast } from "@/hooks/use-toast"
+import validator from "email-validator"
 
 export default function Contact() {
   const { toast } = useToast()
@@ -24,19 +23,46 @@ export default function Contact() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+
+    // Validate email format using email-validator
+    if (!validator.validate(formData.email)) {
+      toast({
+        title: "Invalid email address",
+        description: "Please provide a valid email address.",
+      })
+      return
+    }
+
     setIsSubmitting(true)
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!res.ok) {
+        throw new Error("Failed to send message")
+      }
+
       toast({
         title: "Message sent!",
         description: "Thanks for reaching out. I'll get back to you soon.",
       })
       setFormData({ name: "", email: "", message: "" })
-    }, 1500)
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was an error sending your message. Please try again later.",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -93,7 +119,7 @@ export default function Contact() {
 
             <div className="flex space-x-4 pt-4">
               <a
-                href="https://github.com/"
+                href="https://github.com/Fayzan-Ali-Akhtar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 bg-gradient-to-r from-gray-600 to-gray-700 rounded-full shadow-md hover:from-gray-700 hover:to-gray-800 transition-colors"
@@ -102,7 +128,7 @@ export default function Contact() {
                 <Github className="h-6 w-6 text-white" />
               </a>
               <a
-                href="https://linkedin.com/"
+                href="http://www.linkedin.com/in/fayzan-ali-akhtar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="p-3 bg-gradient-to-r from-blue-600 to-blue-700 rounded-full shadow-md hover:from-blue-700 hover:to-blue-800 transition-colors"
@@ -151,10 +177,7 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-indigo-950 dark:text-indigo-200 mb-2"
-                >
+                <label htmlFor="message" className="block text-sm font-medium text-indigo-950 dark:text-indigo-200 mb-2">
                   Message
                 </label>
                 <Textarea
@@ -173,13 +196,7 @@ export default function Contact() {
                 disabled={isSubmitting}
                 className="w-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white shadow-lg shadow-indigo-500/20"
               >
-                {isSubmitting ? (
-                  "Sending..."
-                ) : (
-                  <>
-                    Send Message <Send className="ml-2 h-4 w-4" />
-                  </>
-                )}
+                {isSubmitting ? "Sending..." : <>Send Message <Send className="ml-2 h-4 w-4" /></>}
               </Button>
             </form>
           </motion.div>
@@ -188,4 +205,3 @@ export default function Contact() {
     </section>
   )
 }
-

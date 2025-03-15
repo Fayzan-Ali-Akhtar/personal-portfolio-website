@@ -17,7 +17,7 @@ export default function Footer() {
             <p className="text-indigo-200 mb-4 max-w-md">Crafting digital experiences one line of code at a time.</p>
             <div className="flex space-x-4">
               <a
-                href="https://github.com/"
+                href="https://github.com/Fayzan-Ali-Akhtar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-indigo-300 hover:text-white transition-colors"
@@ -26,7 +26,7 @@ export default function Footer() {
                 <Github className="h-5 w-5" />
               </a>
               <a
-                href="https://linkedin.com/"
+                href="http://www.linkedin.com/in/fayzan-ali-akhtar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-indigo-300 hover:text-white transition-colors"
@@ -35,7 +35,7 @@ export default function Footer() {
                 <Linkedin className="h-5 w-5" />
               </a>
               <a
-                href="mailto:fayzan@example.com"
+                href="mailto:fayzan585@gmail.com"
                 className="text-indigo-300 hover:text-white transition-colors"
                 aria-label="Email"
               >

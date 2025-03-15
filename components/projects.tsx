@@ -5,13 +5,24 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ExternalLink, Github } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import Image, { StaticImageData } from "next/image"
+
+// Import local project images
+import intelliLearnImg from "@/public/images/intellilearn.png"
+import cricketImg from "@/public/images/cricket.png"
+import aiChefAssistantImg from "@/public/images/ai-chef-assistant.png"
+import mosaicVisionImg from "@/public/images/mosaic-vision.png"
+import contentModerationImg from "@/public/images/content-moderation.png"
+import coverLetterImg from "@/public/images/cover-letter.png"
+import federatedLearningImg from "@/public/images/federated-learning.png"
+import stableDiffusionImg from "@/public/images/stable-diffusion.png"
 
 type Project = {
   id: number
   title: string
   description: string
   category: "web" | "ai"
-  image: string
+  image: string | StaticImageData
   link: string
   github?: string
   tags: string[]
@@ -26,9 +37,9 @@ export default function Projects() {
       description:
         "An AI-powered ed-tech platform built using the MERN stack, featuring a AI chatbot and timed quiz system.",
       category: "web",
-      image: "/placeholder.svg?height=300&width=500",
-      link: "#",
-      github: "#",
+      image: intelliLearnImg,
+      link: "https://intellilearn-gamma.vercel.app/",
+      github: "https://github.com/Fayzan-Ali-Akhtar/GPT-EdTech",
       tags: ["MERN Stack", "AI", "EdTech"],
       color: "from-blue-500 to-indigo-600",
     },
@@ -38,9 +49,9 @@ export default function Projects() {
       description:
         "A data science project using Python and PyTorch to analyze ESPNcricinfo cricket data and forecast match outcomes.",
       category: "ai",
-      image: "/placeholder.svg?height=300&width=500",
-      link: "#",
-      github: "#",
+      image: cricketImg,
+      link: "https://medium.com/@mustafaaplus52/batting-through-numbers-a-data-driven-analysis-of-cricket-d450423c4fa9",
+      github: "https://github.com/Fayzan-Ali-Akhtar/T20-Cricket-Data-Analysis",
       tags: ["Python", "PyTorch", "Data Science"],
       color: "from-cyan-500 to-blue-600",
     },
@@ -50,9 +61,9 @@ export default function Projects() {
       description:
         "An AI-powered cooking assistant developed with Flask and React.js, integrating Llama 3 and DALL-E 2 to generate personalized recipes with step-by-step instructions.",
       category: "web",
-      image: "/placeholder.svg?height=300&width=500",
-      link: "#",
-      github: "#",
+      image: aiChefAssistantImg,
+      link: "https://ai-chef-assistant.netlify.app/",
+      github: "https://github.com/Fayzan-Ali-Akhtar/AI-Chef-Assistant",
       tags: ["Flask", "React.js", "Llama 3", "DALL-E 2"],
       color: "from-green-500 to-emerald-600",
     },
@@ -62,9 +73,9 @@ export default function Projects() {
       description:
         "A production-ready application built with MERN that offers multi-role access and a quote request system.",
       category: "web",
-      image: "/placeholder.svg?height=300&width=500",
-      link: "#",
-      github: "#",
+      image: mosaicVisionImg,
+      link: "https://mosaic-vision.netlify.app/",
+      github: "https://github.com/Zaimr49/Mosaic-Vision",
       tags: ["MERN Stack", "Multi-role", "Production"],
       color: "from-purple-500 to-indigo-600",
     },
@@ -74,9 +85,9 @@ export default function Projects() {
       description:
         "A machine learning-based solution using Naïve Bayes, RNN, and BERT to moderate content with high recall accuracy.",
       category: "ai",
-      image: "/placeholder.svg?height=300&width=500",
-      link: "#",
-      github: "#",
+      image: contentModerationImg,
+      link: "https://github.com/Fayzan-Ali-Akhtar/Content-Moderation-and-Toxicity-Classification",
+      github: "https://github.com/Fayzan-Ali-Akhtar/Content-Moderation-and-Toxicity-Classification",
       tags: ["ML", "BERT", "RNN", "NLP"],
       color: "from-red-500 to-pink-600",
     },
@@ -86,7 +97,7 @@ export default function Projects() {
       description:
         "A tool leveraging AWS Lambda, DynamoDB, Textract, and Terraform to generate personalized cover letters by parsing resumes.",
       category: "web",
-      image: "/placeholder.svg?height=300&width=500",
+      image: coverLetterImg,
       link: "#",
       github: "#",
       tags: ["AWS", "Terraform", "NLP"],
@@ -99,9 +110,9 @@ export default function Projects() {
       description:
         "An advanced ML project that trains a global model from decentralized, non-IID data, enhancing convergence and fairness.",
       category: "ai",
-      image: "/placeholder.svg?height=300&width=500",
-      link: "#",
-      github: "#",
+      image: federatedLearningImg,
+      link: "https://github.com/Fayzan-Ali-Akhtar/FedDCA",
+      github: "https://github.com/Fayzan-Ali-Akhtar/FedDCA",
       tags: ["Federated Learning", "ML", "Research"],
       color: "from-violet-500 to-purple-600",
     },
@@ -111,7 +122,7 @@ export default function Projects() {
       description:
         "A framework that improves image generation with Stable Diffusion 1.5 using bounding box prediction, object placement, and contextual attention maps.",
       category: "ai",
-      image: "/placeholder.svg?height=300&width=500",
+      image: stableDiffusionImg,
       link: "#",
       github: "#",
       tags: ["Stable Diffusion", "Computer Vision", "AI"],
@@ -204,10 +215,11 @@ export default function Projects() {
                   <div
                     className={`absolute inset-0 bg-gradient-to-r ${project.color} opacity-20 group-hover:opacity-30 transition-opacity duration-300`}
                   ></div>
-                  <img
+                  <Image
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    fill
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-4">
                     <div className="flex gap-2">

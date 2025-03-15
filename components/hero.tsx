@@ -123,7 +123,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
           >
-            Hello, I&apos;m Fayzan – I Build Solutions That Inspire
+            Hello, I&apos;m Fayzan – Building Smarter Web & AI Experiences
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}

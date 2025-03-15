@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { useMobile } from "@/hooks/use-mobile"
+import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -71,37 +72,61 @@ export default function Navbar() {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-6">
-              {navItems.map((item, index) => (
-                <motion.a
-                  key={index}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.1 * index }}
-                  href={item.href}
-                  onClick={(e) => {
-                    e.preventDefault()
-                    handleNavClick(item.href)
-                  }}
-                  className="text-indigo-700 dark:text-indigo-300 hover:text-indigo-900 dark:hover:text-indigo-100 transition-colors relative group"
-                >
-                  {item.name}
-                  <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
-                </motion.a>
-              ))}
-            </nav>
+            <div className="hidden md:flex items-center space-x-6">
+              <nav className="flex items-center space-x-6">
+                {navItems.map((item, index) => (
+                  <motion.a
+                    key={index}
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: 0.1 * index }}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleNavClick(item.href)
+                    }}
+                    className="text-indigo-700 dark:text-indigo-300 hover:text-indigo-900 dark:hover:text-indigo-100 transition-colors relative group"
+                  >
+                    {item.name}
+                    <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                  </motion.a>
+                ))}
+              </nav>
 
-            {/* Mobile Menu Button */}
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="md:hidden text-indigo-700 dark:text-indigo-300"
-              onClick={toggleMenu}
-              aria-label="Toggle menu"
-            >
-              <Menu className="h-6 w-6" />
-            </motion.button>
+              {/* Theme Toggle Button */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.7 }}
+                className="relative z-20"
+              >
+                <ThemeToggle />
+              </motion.div>
+            </div>
+
+            {/* Mobile Menu Button and Theme Toggle */}
+            <div className="md:hidden flex items-center space-x-4">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: 0.3 }}
+                className="relative z-20"
+              >
+                <ThemeToggle />
+              </motion.div>
+
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-indigo-700 dark:text-indigo-300 relative z-20"
+                onClick={toggleMenu}
+                aria-label="Toggle menu"
+                type="button"
+              >
+                <Menu className="h-6 w-6" />
+              </motion.button>
+            </div>
           </div>
         </div>
       </motion.header>
@@ -114,14 +139,19 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-indigo-900 z-50 md:hidden"
+            className="fixed inset-0 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-indigo-900 z-40 md:hidden"
           >
             <div className="flex flex-col h-full">
               <div className="flex justify-between items-center p-4 border-b border-indigo-200 dark:border-indigo-800">
                 <div className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
                   Fayzan Ali Akhtar
                 </div>
-                <button onClick={toggleMenu} className="text-indigo-700 dark:text-indigo-300" aria-label="Close menu">
+                <button
+                  onClick={toggleMenu}
+                  className="text-indigo-700 dark:text-indigo-300"
+                  aria-label="Close menu"
+                  type="button"
+                >
                   <X className="h-6 w-6" />
                 </button>
               </div>
