@@ -1,111 +1,98 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { ExternalLink } from "lucide-react"
-import Link from "next/link"
-
-const experiences = [
-  {
-    title: "Full-Stack Developer Intern",
-    company: "Devsinc",
-    location: "Lahore, Pakistan",
-    period: "July 2023 – Sept 2023",
-    projects: [
-      {
-        name: "Social Networking App",
-        description:
-          "Developed an interactive social media platform using React.js, integrating RESTful APIs for seamless functionality and improving UI/UX with responsive design.",
-        link: "#", // Replace with actual link
-      },
-      {
-        name: "Bug Tracking System",
-        description:
-          "Engineered a MERN stack based bug-reporting platform, incorporating JWT authentication for secure user access and optimized MongoDB for performance.",
-        link: "#", // Replace with actual link
-      },
-    ],
-  },
-]
+import { Briefcase, GraduationCap } from "lucide-react"
 
 export default function Experience() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.5 },
-    },
-  }
-
   return (
-    <section id="experience" className="py-16 md:py-24">
-      <div className="container px-4 mx-auto">
+    <section id="experience" className="py-20 bg-gradient-pink-purple bg-pattern-grid">
+      <div className="container px-4 md:px-6">
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
-          className="max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto text-center mb-12"
         >
-          <motion.div variants={itemVariants} className="mb-12 text-center">
-            <h2 className="text-3xl font-bold mb-4">Work Experience</h2>
-            <div className="h-1 w-20 bg-primary mx-auto mb-6" />
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+            Experience
+          </h2>
+          <div className="h-1 w-20 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 mx-auto mb-8 rounded-full"></div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          {/* Professional Experience */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-white/90 to-indigo-50/90 dark:from-gray-800/90 dark:to-indigo-900/40 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-indigo-100 dark:border-indigo-900/30"
+          >
+            <div className="flex items-center mb-6">
+              <div className="p-3 bg-indigo-100 dark:bg-indigo-900/50 rounded-full mr-4 shadow-md">
+                <Briefcase className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-indigo-700 dark:text-indigo-300">Professional Experience</h3>
+            </div>
+
+            <div className="space-y-8">
+              <div className="relative pl-8 border-l-2 border-indigo-300 dark:border-indigo-700">
+                <div className="absolute w-4 h-4 bg-gradient-to-r from-indigo-600 to-purple-600 rounded-full -left-[9px] top-1 shadow-md"></div>
+                <h4 className="text-xl font-semibold text-indigo-800 dark:text-indigo-300">
+                  Full-Stack Developer Intern
+                </h4>
+                <p className="text-sm text-indigo-600 dark:text-indigo-400 mb-2">
+                  July 2023 – Sept 2023, Lahore, Pakistan
+                </p>
+                <p className="text-indigo-950 dark:text-indigo-200">
+                  Developed a social networking application using React.js and engineered a bug tracking system with the
+                  MERN stack, focusing on responsive design and security.
+                </p>
+              </div>
+            </div>
           </motion.div>
 
-          {experiences.map((exp, index) => (
-            <motion.div key={index} variants={itemVariants}>
-              <Card className="mb-8 overflow-hidden">
-                <div className="bg-primary/10 py-4 px-6 border-b">
-                  <div className="flex justify-between items-start flex-wrap gap-y-2">
-                    <div>
-                      <h3 className="text-xl font-semibold">{exp.title}</h3>
-                      <p className="text-muted-foreground">{exp.company}</p>
-                    </div>
-                    <div className="text-right">
-                      <Badge variant="outline">{exp.period}</Badge>
-                      <p className="text-sm text-muted-foreground mt-1">{exp.location}</p>
-                    </div>
-                  </div>
+          {/* Teaching Experience */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-white/90 to-purple-50/90 dark:from-gray-800/90 dark:to-purple-900/40 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-purple-100 dark:border-purple-900/30"
+          >
+            <div className="flex items-center mb-6">
+              <div className="p-3 bg-purple-100 dark:bg-purple-900/50 rounded-full mr-4 shadow-md">
+                <GraduationCap className="h-6 w-6 text-purple-600 dark:text-purple-400" />
+              </div>
+              <h3 className="text-2xl font-bold text-purple-700 dark:text-purple-300">Teaching Experience</h3>
+            </div>
+
+            <div className="space-y-8">
+              <div className="relative pl-8 border-l-2 border-purple-300 dark:border-purple-700">
+                <div className="absolute w-4 h-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full -left-[9px] top-1 shadow-md"></div>
+                <h4 className="text-xl font-semibold text-purple-800 dark:text-purple-300">
+                  Teaching Assistant at LUMS
+                </h4>
+                <p className="text-purple-950 dark:text-purple-200">
+                Supported over 150 students in each of the following courses: Data Structures, Object-Oriented Programming, Algorithms, Software Engineering, and Advanced Programming.
+                </p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {["Data Structures", "OOP", "Algorithms", "Software Engineering", "Advanced Programming"].map(
+                    (course, index) => (
+                      <span
+                        key={index}
+                        className="px-3 py-1 bg-purple-100 dark:bg-purple-900/50 text-purple-700 dark:text-purple-300 text-xs rounded-full shadow-sm"
+                      >
+                        {course}
+                      </span>
+                    ),
+                  )}
                 </div>
-                <CardContent className="pt-6">
-                  <h4 className="text-lg font-medium mb-4">Projects</h4>
-                  <div className="space-y-6">
-                    {exp.projects.map((project, idx) => (
-                      <div key={idx} className="border-l-4 border-primary/30 pl-4">
-                        <div className="flex items-center gap-2 mb-2">
-                          <h5 className="font-medium">{project.name}</h5>
-                          {project.link && (
-                            <Link
-                              href={project.link}
-                              target="_blank"
-                              className="text-primary hover:text-primary/80 inline-flex items-center"
-                            >
-                              <ExternalLink className="h-4 w-4" />
-                              <span className="sr-only">Live Site</span>
-                            </Link>
-                          )}
-                        </div>
-                        <p className="text-muted-foreground">{project.description}</p>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </motion.div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </section>
   )

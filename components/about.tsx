@@ -1,119 +1,87 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-
-const skills = [
-  { category: "Languages", items: ["Python", "JavaScript", "TypeScript", "C", "C++"] },
-  { category: "Frontend", items: ["React.js", "Next.js", "Tailwind CSS", "HTML/CSS"] },
-  { category: "Backend", items: ["Node.js", "Express.js", "MongoDB", "MySQL", "PostgreSQL"] },
-  { category: "Tools", items: ["Git", "AWS", "Azure", "Jira", "Agile"] },
-  { category: "ML/AI", items: ["PyTorch", "Machine Learning", "Deep Learning", "Big Data", "MLOps"] },
-]
+import { CheckCircle } from "lucide-react"
 
 export default function About() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: { duration: 0.5 },
-    },
-  }
+  const milestones = [
+    { title: "Computer Science at LUMS", year: "2021-2025" },
+    // { title: "First Teaching Assistant Role", year: "2021" },
+    { title: "Internship at Devsinc", year: "2023" },
+    // { title: "400+ Students Mentored", year: "2021-2024" },
+  ]
 
   return (
-    <section id="about" className="py-16 md:py-24 bg-muted/30">
-      <div className="container px-4 mx-auto">
+    <section id="about" className="py-20 bg-gradient-purple-blue bg-pattern-dots">
+      <div className="container px-4 md:px-6">
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
-          className="max-w-4xl mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="max-w-3xl mx-auto text-center mb-12"
         >
-          <motion.div variants={itemVariants} className="mb-12 text-center">
-            <h2 className="text-3xl font-bold mb-4">About Me</h2>
-            <div className="h-1 w-20 bg-primary mx-auto mb-6" />
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+            About Me
+          </h2>
+          <div className="h-1 w-20 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 mx-auto mb-8 rounded-full"></div>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="space-y-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl"
+          >
+            <p className="text-lg text-indigo-950 dark:text-indigo-200">
+              I am a passionate developer and educator specializing in building innovative digital solutions. Studying
+              Computer Science at LUMS and working on real-world projects has allowed me to blend technical expertise
+              with creative problem-solving. I love transforming complex challenges into engaging, user-friendly
+              applications.
+            </p>
+            {/* <div className="pt-4">
+              <h3 className="text-xl font-semibold mb-4 text-indigo-700 dark:text-indigo-300">Teaching Experience</h3>
+              <p className="text-lg text-indigo-950 dark:text-indigo-200">
+                As a Teaching Assistant at LUMS, I supported over 400 students in courses such as Data Structures,
+                Object-Oriented Programming, Algorithms, Software Engineering, and Advanced Programming. This role
+                sharpened my ability to explain complex concepts in an accessible way.
+              </p>
+            </div> */}
           </motion.div>
 
-          <motion.div variants={itemVariants} className="mb-12">
-            <p className="text-lg leading-relaxed mb-6">
-              I'm a Computer Science student at Lahore University of Management Sciences (LUMS), with a strong academic
-              record and a spot on the Dean's Honour List. My focus is on full-stack development, machine learning, and
-              data science.
-            </p>
-            <p className="text-lg leading-relaxed">
-              With professional experience as a Full-Stack Developer Intern at Devsinc and a diverse portfolio of
-              projects ranging from AI-powered platforms to data science applications, I'm constantly seeking to expand
-              my knowledge and develop innovative solutions to real-world problems.
-            </p>
-          </motion.div>
-
-          <motion.div variants={itemVariants}>
-            <h3 className="text-2xl font-semibold mb-6">Education</h3>
-            <Card className="mb-10">
-              <CardContent className="pt-6">
-                <h4 className="text-xl font-medium">Lahore University of Management Sciences (LUMS)</h4>
-                <p className="text-muted-foreground">B.S. Computer Science | Dean's Honour List</p>
-                <p className="text-sm text-muted-foreground mt-1">Sept 2021 – May 2025 | Lahore, Pakistan</p>
-
-                <div className="mt-4">
-                  <h5 className="text-base font-medium mb-2">Relevant Coursework</h5>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      "Software Engineering",
-                      "Databases",
-                      "Generative AI",
-                      "Cloud Development",
-                      "Machine Learning",
-                      "Deep Learning",
-                      "Data Structures",
-                      "Algorithms",
-                      "Operating Systems",
-                      "Artificial Intelligence",
-                      "Big Data & MLOps",
-                    ].map((course) => (
-                      <Badge key={course} variant="outline">
-                        {course}
-                      </Badge>
-                    ))}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-white/90 to-indigo-50/90 dark:from-gray-800/90 dark:to-indigo-900/40 backdrop-blur-sm rounded-2xl p-8 shadow-xl border border-indigo-100 dark:border-indigo-900/30"
+          >
+            <h3 className="text-xl font-semibold mb-6 text-center text-indigo-700 dark:text-indigo-300">
+              Key Milestones
+            </h3>
+            <div className="space-y-6 relative">
+              <div className="absolute left-3.5 top-0 h-full w-0.5 bg-gradient-to-b from-indigo-600 via-purple-600 to-pink-600"></div>
+              {milestones.map((milestone, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.1 * index }}
+                  viewport={{ once: true }}
+                  className="relative pl-10"
+                >
+                  <div className="absolute left-0 top-1.5 bg-white dark:bg-gray-800 rounded-full p-0.5 shadow-md">
+                    <CheckCircle className="h-6 w-6 text-indigo-600 dark:text-indigo-400" />
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          <motion.div variants={itemVariants}>
-            <h3 className="text-2xl font-semibold mb-6">Skills</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {skills.map((skillGroup) => (
-                <Card key={skillGroup.category}>
-                  <CardContent className="pt-6">
-                    <h4 className="text-lg font-medium mb-3">{skillGroup.category}</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {skillGroup.items.map((skill) => (
-                        <Badge key={skill} variant="secondary">
-                          {skill}
-                        </Badge>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
+                  <h4 className="font-medium text-indigo-800 dark:text-indigo-300">{milestone.title}</h4>
+                  <p className="text-sm text-indigo-600 dark:text-indigo-400">{milestone.year}</p>
+                </motion.div>
               ))}
             </div>
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

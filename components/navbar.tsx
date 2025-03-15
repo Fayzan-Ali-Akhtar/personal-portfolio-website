@@ -1,109 +1,153 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Link from "next/link"
-import { Menu, X, Moon, Sun } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { useTheme } from "next-themes"
 import { motion, AnimatePresence } from "framer-motion"
-
-const navLinks = [
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
-  { href: "https://drive.google.com/your-resume-link", label: "Resume" },
-]
+import { Menu, X } from "lucide-react"
+import { useToast } from "@/hooks/use-toast"
+import { useMobile } from "@/hooks/use-mobile"
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const [isScrolled, setIsScrolled] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const isMobile = useMobile()
+  const { toast } = useToast()
+
+  const navItems = [
+    { name: "Home", href: "#" },
+    { name: "About", href: "#about" },
+    { name: "Experience", href: "#experience" },
+    { name: "Projects", href: "#projects" },
+    { name: "Skills", href: "#skills" },
+    { name: "Blog", href: "#blog" },
+    { name: "Contact", href: "#contact" },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 10)
+      if (window.scrollY > 50) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
     }
 
     window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
   }, [])
 
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen)
+  }
+
+  const handleNavClick = (href: string) => {
+    setIsMenuOpen(false)
+    const element = document.querySelector(href)
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/80 backdrop-blur-md shadow-sm" : "bg-transparent"
-      }`}
-    >
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold text-primary transition-colors hover:text-primary/80">
-          Fayzan Akhtar
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <Link key={link.label} href={link.href} className="text-foreground/80 hover:text-primary transition-colors">
-              {link.label}
-            </Link>
-          ))}
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
-        </nav>
-
-        {/* Mobile Menu Button */}
-        <div className="flex items-center gap-2 md:hidden">
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            aria-label="Toggle theme"
-          >
-            {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-          </Button>
-          <Button
-            variant="ghost"
-            size="icon"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
-        </div>
-
-        {/* Mobile Navigation */}
-        <AnimatePresence>
-          {mobileMenuOpen && (
+    <>
+      <motion.header
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-md" : "bg-transparent"
+        }`}
+      >
+        <div className="container mx-auto px-4 md:px-6 py-4">
+          <div className="flex items-center justify-between">
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-x-0 top-[72px] bg-background/95 backdrop-blur-md shadow-md p-4 border-b border-border md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
             >
-              <nav className="flex flex-col gap-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.label}
-                    href={link.href}
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="text-foreground/80 hover:text-primary transition-colors py-2"
+              Fayzan Ali Akhtar
+            </motion.div>
+
+            {/* Desktop Navigation */}
+            <nav className="hidden md:flex items-center space-x-6">
+              {navItems.map((item, index) => (
+                <motion.a
+                  key={index}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.3, delay: 0.1 * index }}
+                  href={item.href}
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleNavClick(item.href)
+                  }}
+                  className="text-indigo-700 dark:text-indigo-300 hover:text-indigo-900 dark:hover:text-indigo-100 transition-colors relative group"
+                >
+                  {item.name}
+                  <span className="absolute left-0 right-0 bottom-0 h-0.5 bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                </motion.a>
+              ))}
+            </nav>
+
+            {/* Mobile Menu Button */}
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="md:hidden text-indigo-700 dark:text-indigo-300"
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              <Menu className="h-6 w-6" />
+            </motion.button>
+          </div>
+        </div>
+      </motion.header>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-indigo-900 z-50 md:hidden"
+          >
+            <div className="flex flex-col h-full">
+              <div className="flex justify-between items-center p-4 border-b border-indigo-200 dark:border-indigo-800">
+                <div className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
+                  Fayzan Ali Akhtar
+                </div>
+                <button onClick={toggleMenu} className="text-indigo-700 dark:text-indigo-300" aria-label="Close menu">
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+              <nav className="flex flex-col p-4 space-y-4">
+                {navItems.map((item, index) => (
+                  <motion.a
+                    key={index}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.3, delay: 0.05 * index }}
+                    href={item.href}
+                    onClick={(e) => {
+                      e.preventDefault()
+                      handleNavClick(item.href)
+                    }}
+                    className="text-lg text-indigo-700 dark:text-indigo-300 py-2 border-b border-indigo-200 dark:border-indigo-800"
                   >
-                    {link.label}
-                  </Link>
+                    {item.name}
+                  </motion.a>
                 ))}
               </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </header>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 

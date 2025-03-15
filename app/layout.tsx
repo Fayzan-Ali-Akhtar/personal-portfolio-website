@@ -3,13 +3,14 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "@/components/ui/toast"
+import Navbar from "@/components/navbar"
 
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Fayzan Ali Akhtar - Full-Stack Developer",
-  description: "Personal portfolio of Fayzan Ali Akhtar, a full-stack developer and machine learning enthusiast.",
+  title: "Fayzan Ali Akhtar - Full-Stack Developer & AI Enthusiast",
+  description:
+    "Portfolio of Fayzan Ali Akhtar, a Full-Stack Developer, AI Enthusiast, and Educator specializing in web development and AI/ML solutions.",
     generator: 'v0.dev'
 }
 
@@ -22,8 +23,8 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <Navbar />
           {children}
-          <Toaster />
         </ThemeProvider>
       </body>
     </html>
