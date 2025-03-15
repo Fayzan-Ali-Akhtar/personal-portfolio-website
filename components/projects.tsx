@@ -155,7 +155,7 @@ export default function Projects() {
             Explore my latest projects spanning web development and AI/ML solutions.
           </p>
 
-          <div className="flex justify-center gap-4 mb-12">
+          <div className="flex flex-wrap justify-center gap-4 mb-12">
             <Button
               variant={filter === "all" ? "default" : "outline"}
               onClick={() => setFilter("all")}

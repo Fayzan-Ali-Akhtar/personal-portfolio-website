@@ -56,7 +56,7 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-md" : "bg-transparent"
         }`}
       >
@@ -98,19 +98,17 @@ export default function Navbar() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 0.7 }}
-                className="relative z-20"
               >
                 <ThemeToggle />
               </motion.div>
             </div>
 
             {/* Mobile Menu Button and Theme Toggle */}
-            <div className="md:hidden flex items-center space-x-4">
+            <div className="md:hidden flex items-center space-x-3">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 0.3 }}
-                className="relative z-20"
               >
                 <ThemeToggle />
               </motion.div>
@@ -119,12 +117,13 @@ export default function Navbar() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-indigo-700 dark:text-indigo-300 relative z-20"
+                className="relative z-50 p-2 text-indigo-700 dark:text-indigo-300 bg-white/20 backdrop-blur-sm border border-white/20 dark:bg-gray-800/50 rounded-full"
                 onClick={toggleMenu}
                 aria-label="Toggle menu"
                 type="button"
+                style={{ WebkitTapHighlightColor: "transparent" }}
               >
-                <Menu className="h-6 w-6" />
+                {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </motion.button>
             </div>
           </div>
@@ -139,23 +138,10 @@ export default function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.3 }}
-            className="fixed inset-0 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-indigo-900 z-40 md:hidden"
+            className="fixed inset-0 bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-gray-900 dark:to-indigo-900 z-30 md:hidden pt-16"
           >
             <div className="flex flex-col h-full">
-              <div className="flex justify-between items-center p-4 border-b border-indigo-200 dark:border-indigo-800">
-                <div className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600">
-                  Fayzan Ali Akhtar
-                </div>
-                <button
-                  onClick={toggleMenu}
-                  className="text-indigo-700 dark:text-indigo-300"
-                  aria-label="Close menu"
-                  type="button"
-                >
-                  <X className="h-6 w-6" />
-                </button>
-              </div>
-              <nav className="flex flex-col p-4 space-y-4">
+              <nav className="flex flex-col p-6 space-y-6">
                 {navItems.map((item, index) => (
                   <motion.a
                     key={index}

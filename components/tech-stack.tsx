@@ -32,7 +32,7 @@ export default function TechStack() {
         { name: "MongoDB", color: "bg-green-600" },
         { name: "MERN Stack", color: "bg-blue-600" },
         { name: "Flask", color: "bg-blue-400" },
-        { name: "HTML/CSS", color: "bg-orange-500" },
+        { name: "PostgreSQL", color: "bg-orange-500" },
         { name: "JavaScript", color: "bg-yellow-500" },
         { name: "TypeScript", color: "bg-blue-500" },
       ],

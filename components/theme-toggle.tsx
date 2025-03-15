@@ -25,9 +25,10 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="relative z-10 p-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/20 dark:bg-gray-800/50 hover:bg-white/30 dark:hover:bg-gray-800/70 transition-colors cursor-pointer"
+      className="relative z-50 p-2.5 md:p-2 rounded-full bg-white/20 backdrop-blur-sm border border-white/20 dark:bg-gray-800/50 hover:bg-white/30 dark:hover:bg-gray-800/70 transition-colors cursor-pointer touch-manipulation"
       aria-label="Toggle theme"
       type="button"
+      style={{ WebkitTapHighlightColor: "transparent" }}
     >
       <motion.div
         initial={{ scale: 0.5, opacity: 0 }}
@@ -36,7 +37,11 @@ export function ThemeToggle() {
         transition={{ duration: 0.2 }}
         key={theme}
       >
-        {theme === "dark" ? <Sun className="h-5 w-5 text-yellow-400" /> : <Moon className="h-5 w-5 text-indigo-600" />}
+        {theme === "dark" ? (
+          <Sun className="h-5 w-5 md:h-5 md:w-5 text-yellow-400" />
+        ) : (
+          <Moon className="h-5 w-5 md:h-5 md:w-5 text-indigo-600" />
+        )}
       </motion.div>
     </button>
   )
