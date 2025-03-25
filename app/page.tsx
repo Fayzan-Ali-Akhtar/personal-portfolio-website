@@ -3,7 +3,7 @@ import About from "@/components/about"
 import Experience from "@/components/experience"
 import Projects from "@/components/projects"
 import TechStack from "@/components/tech-stack"
-import Blog from "@/components/blog"
+// import Blog from "@/components/blog"
 import Contact from "@/components/contact"
 import Footer from "@/components/footer"
 

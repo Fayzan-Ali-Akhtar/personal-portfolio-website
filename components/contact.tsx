@@ -36,6 +36,7 @@ export default function Contact() {
     }
 
     setIsSubmitting(true)
+    // console.log("Form data:", formData)
 
     try {
       const res = await fetch("/api/contact", {
@@ -47,6 +48,7 @@ export default function Contact() {
       })
 
       if (!res.ok) {
+        // console.log("Failed to send message")
         throw new Error("Failed to send message")
       }
 
@@ -61,6 +63,7 @@ export default function Contact() {
         description: "There was an error sending your message. Please try again later.",
       })
     } finally {
+      // console.log("Message sent / failed")
       setIsSubmitting(false)
     }
   }

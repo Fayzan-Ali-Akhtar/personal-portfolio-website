@@ -1,7 +1,7 @@
 // app/api/contact/route.ts
 
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import axios from "axios";
 
 export async function POST(request: Request) {
   try {
@@ -14,28 +14,32 @@ export async function POST(request: Request) {
       );
     }
 
-    // Create a transporter using environment variables
-    const transporter = nodemailer.createTransport({
-      host: process.env.EMAIL_HOST, // e.g., smtp.gmail.com
-      port: Number(process.env.EMAIL_PORT) || 587,
-      secure: false, // true for port 465, false for other ports
-      auth: {
-        user: process.env.EMAIL_USER, // your email address
-        pass: process.env.EMAIL_PASS, // your email password or app-specific password
-      },
-    });
+    // Retrieve your custom email sending endpoint from the environment variables
+    const send_email_url = process.env.SEND_EMAIL_URL;
+    if (!send_email_url) {
+      throw new Error("SEND_EMAIL_URL is not defined in environment variables.");
+    }
 
-    const mailOptions = {
-      from: email, // sender address from the form
-      to: "fayzan585@gmail.com", // recipient address
-      subject: `New message from ${name}`,
-      text: message,
-    };
+    // Forward the request to your custom API endpoint (hosted on AWS)
+    const response = await axios.post(
+      send_email_url,
+      { name, email, message },
+      {
+        headers: { "Content-Type": "application/json" },
+      }
+    );
 
-    await transporter.sendMail(mailOptions);
-
-    return NextResponse.json({ success: true }, { status: 200 });
-  } catch (error) {
+    // Check if the email was sent successfully
+    if (response.status === 200) {
+      return NextResponse.json({ success: true }, { status: 200 });
+    } else {
+      console.error("Error response from email API:", response.data);
+      return NextResponse.json(
+        { error: "Error sending email" },
+        { status: 500 }
+      );
+    }
+  } catch (error: any) {
     console.error("Error sending email:", error);
     return NextResponse.json(
       { error: "Error sending email" },

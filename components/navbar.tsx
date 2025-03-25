@@ -3,15 +3,11 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
-import { useToast } from "@/hooks/use-toast"
-import { useMobile } from "@/hooks/use-mobile"
 import { ThemeToggle } from "@/components/theme-toggle"
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const isMobile = useMobile()
-  const { toast } = useToast()
 
   const navItems = [
     { name: "Home", href: "#" },
