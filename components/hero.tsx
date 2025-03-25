@@ -123,7 +123,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600"
           >
-            Hello, I&apos;m Fayzan – Building Smarter Web & AI Experiences
+            Hello, I&apos;m Fayzan – Building Smarter Web & AI Solutions
           </motion.h1>
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -131,7 +131,7 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="text-xl md:text-2xl text-indigo-950 dark:text-indigo-200 max-w-2xl mx-auto"
           >
-            AI Enthusiast & Full-Stack Developer
+            AI Engineer & Full-Stack Developer
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -143,7 +143,7 @@ export default function Hero() {
               className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 hover:from-indigo-700 hover:via-purple-700 hover:to-pink-700 text-white font-medium px-8 py-6 rounded-full shadow-lg shadow-indigo-500/20"
               onClick={scrollToProjects}
             >
-              Discover My Work
+              Explore My Projects
             </Button>
           </motion.div>
         </motion.div>

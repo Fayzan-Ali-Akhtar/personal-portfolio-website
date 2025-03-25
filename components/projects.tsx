@@ -16,6 +16,8 @@ import contentModerationImg from "@/public/images/content-moderation.png"
 import coverLetterImg from "@/public/images/cover-letter.png"
 import federatedLearningImg from "@/public/images/federated-learning.png"
 import stableDiffusionImg from "@/public/images/stable-diffusion.png"
+import socialNetworkingAppImg from "@/public/images/social-networking-app.png";
+import bugTrackingSystemImg from "@/public/images/bug-tracking-system.png";
 
 type Project = {
   id: number
@@ -27,6 +29,7 @@ type Project = {
   github?: string
   tags: string[]
   color: string
+  dateRange: string;
 }
 
 export default function Projects() {
@@ -42,6 +45,7 @@ export default function Projects() {
       github: "https://github.com/Fayzan-Ali-Akhtar/GPT-EdTech",
       tags: ["MERN Stack", "AI", "EdTech"],
       color: "from-blue-500 to-indigo-600",
+      dateRange: "Jan 2024 – May 2024",
     },
     {
       id: 2,
@@ -54,18 +58,20 @@ export default function Projects() {
       github: "https://github.com/Fayzan-Ali-Akhtar/T20-Cricket-Data-Analysis",
       tags: ["Python", "PyTorch", "Data Science"],
       color: "from-cyan-500 to-blue-600",
+      dateRange: "Nov 2023 – Dec 2023",
     },
     {
       id: 3,
       title: "AI Chef Assistant",
       description:
         "An AI-powered cooking assistant developed with Flask and React.js, integrating Llama 3 and DALL-E 2 to generate personalized recipes with step-by-step instructions.",
-      category: "web",
+      category: "ai",
       image: aiChefAssistantImg,
       link: "https://ai-chef-assistant.netlify.app/",
       github: "https://github.com/Fayzan-Ali-Akhtar/AI-Chef-Assistant",
       tags: ["Flask", "React.js", "Llama 3", "DALL-E 2"],
       color: "from-green-500 to-emerald-600",
+      dateRange: "Mar 2024 – May 2024",
     },
     {
       id: 4,
@@ -78,6 +84,7 @@ export default function Projects() {
       github: "https://github.com/Zaimr49/Mosaic-Vision",
       tags: ["MERN Stack", "Multi-role", "Production"],
       color: "from-purple-500 to-indigo-600",
+      dateRange: "Jun 2024 – Aug 2024",
     },
     {
       id: 5,
@@ -90,6 +97,7 @@ export default function Projects() {
       github: "https://github.com/Fayzan-Ali-Akhtar/Content-Moderation-and-Toxicity-Classification",
       tags: ["ML", "BERT", "RNN", "NLP"],
       color: "from-red-500 to-pink-600",
+      dateRange: "Nov 2023 – Dec 2023",
     },
     {
       id: 6,
@@ -102,6 +110,7 @@ export default function Projects() {
       github: "#",
       tags: ["AWS", "Terraform", "NLP"],
       color: "from-amber-500 to-orange-600",
+      dateRange: "Mar 2025 – Present",
     }, 
     
     {
@@ -115,18 +124,46 @@ export default function Projects() {
       github: "https://github.com/Fayzan-Ali-Akhtar/FedDCA",
       tags: ["Federated Learning", "ML", "Research"],
       color: "from-violet-500 to-purple-600",
+      dateRange: "Nov 2024 – Present",
     },
     {
       id: 8,
       title: "Enhanced Layout & Quantity Handling for Stable Diffusion",
       description:
-        "A framework that improves image generation with Stable Diffusion 1.5 using bounding box prediction, object placement, and contextual attention maps.",
+      "A framework that improves image generation with Stable Diffusion 1.5 using bounding box prediction, object placement, and contextual attention maps.",
       category: "ai",
       image: stableDiffusionImg,
       link: "#",
       github: "#",
       tags: ["Stable Diffusion", "Computer Vision", "AI"],
       color: "from-pink-500 to-rose-600",
+      dateRange: "Sept 2024 – Present",
+    },
+    {
+      id: 9, // Ensure this ID is unique
+      title: "Bug Tracking System",
+      description:
+        "Engineered a MERN stack-based bug-reporting platform, incorporating JWT authentication for secure user access and optimized MongoDB for performance.",
+      category: "web",
+      image: bugTrackingSystemImg,
+      link: "http://bugzilla.vercel.app",
+      github: "", // Add GitHub link if available
+      tags: ["MERN Stack", "JWT Authentication", "MongoDB"],
+      color: "from-red-500 to-orange-600",
+      dateRange: "Jul 2023 – Sept 2023",
+    },
+    {
+      id: 10, // Ensure this ID is unique
+      title: "Social Networking App",
+      description:
+        "Developed an interactive social media platform using React.js, integrating RESTful APIs for seamless functionality and enhancing UI/UX with responsive design.",
+      category: "web",
+      image: socialNetworkingAppImg,
+      link: "https://connect-react.netlify.app/",
+      github: "", // Add GitHub link if available
+      tags: ["React.js", "RESTful APIs", "Responsive Design"],
+      color: "from-teal-500 to-blue-600",
+      dateRange: "Jul 2023 – Sept 2023",
     },
   ]
 
@@ -256,6 +293,7 @@ export default function Projects() {
                       {project.category === "web" ? "Web Dev" : "AI/ML"}
                     </Badge>
                   </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{project.dateRange}</p>
                   <p className="text-indigo-950 dark:text-indigo-200 mb-4">{project.description}</p>
                   <div className="flex flex-wrap gap-2 mt-4">
                     {project.tags.map((tag, i) => (

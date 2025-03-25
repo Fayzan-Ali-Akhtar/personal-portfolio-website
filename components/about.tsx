@@ -43,7 +43,7 @@ export default function About() {
             className="space-y-6 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-2xl shadow-xl"
           >
             <p className="text-lg text-indigo-950 dark:text-indigo-200">
-              I am a passionate developer and educator specializing in building innovative digital solutions. Studying
+              I am a passionate developer specializing in building innovative digital solutions. Studying
               Computer Science at LUMS and working on real-world projects has allowed me to blend technical expertise
               with creative problem-solving. I love transforming complex challenges into engaging, user-friendly
               applications.
@@ -133,7 +133,7 @@ export default function About() {
                 className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6"
               >
                 <h3 className="text-xl font-bold text-white">Fayzan Ali Akhtar</h3>
-                <p className="text-white/80">Full-Stack Developer & AI Enthusiast</p>
+                <p className="text-white/80">Full-Stack Developer & AI Engineer</p>
               </motion.div>
             </motion.div>
           </motion.div>
